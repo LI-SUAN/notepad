@@ -15,6 +15,7 @@
 #include <QMimeData>
 #include <QFileInfo>
 #include <QDebug>
+#include <QUrl>
 
 CustomTextEdit::CustomTextEdit(QWidget *parent) : QTextEdit(parent) {}
 
@@ -49,21 +50,21 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    qDebug() << "MainWindow constructor started";
     ui->setupUi(this);
-    qDebug() << "setupUi completed";
-    // setupConnections();  // 暂时注释掉这行
-    qDebug() << "After setupConnections";
-
+    
     // 创建自定义的 TextEdit
     textEdit = new CustomTextEdit(this);
 
     // 创建一个垂直布局
-    QVBoxLayout *layout = new QVBoxLayout(ui->cntralwidget);
+    QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(textEdit);
 
     // 设置中心部件的布局
-    ui->centralwidget->setLayout(layout);
+    QWidget *centralWidget = new QWidget(this);
+    centralWidget->setLayout(layout);
+    setCentralWidget(centralWidget);
+
+    setupConnections();
 
     connect(textEdit, &CustomTextEdit::fileDropped, this, &MainWindow::onFileDropped);
 
@@ -83,22 +84,105 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_action_new_file_triggered()
 {
-    // 实现新建文件的逻辑
+    if (maybeSave()) {
+        textEdit->clear();
+        setCurrentFile("");
+    }
 }
 
 void MainWindow::on_action_open_file_triggered()
 {
-    // 实现打开文件的逻辑
+    if (maybeSave()) {
+        QString fileName = QFileDialog::getOpenFileName(this);
+        if (!fileName.isEmpty()) {
+            loadFile(fileName);
+        }
+    }
 }
 
 void MainWindow::on_action_save_file_triggered()
 {
-    // 实现保存文件的逻辑
+    if (currentFile.isEmpty()) {
+        on_action_save_as_triggered();
+    } else {
+        saveFile(currentFile);
+    }
 }
 
 void MainWindow::on_action_save_as_triggered()
 {
-    // 实现另存为的逻辑
+    QString fileName = QFileDialog::getSaveFileName(this);
+    if (!fileName.isEmpty()) {
+        saveFile(fileName);
+    }
+}
+
+bool MainWindow::maybeSave()
+{
+    if (!textEdit->document()->isModified())
+        return true;
+    const QMessageBox::StandardButton ret
+        = QMessageBox::warning(this, tr("应用程序"),
+                               tr("文档已被修改。\n"
+                                  "是否保存更改？"),
+                               QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    switch (ret) {
+    case QMessageBox::Save:
+        on_action_save_file_triggered();
+        return !textEdit->document()->isModified();
+    case QMessageBox::Cancel:
+        return false;
+    default:
+        break;
+    }
+    return true;
+}
+
+void MainWindow::loadFile(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, tr("应用程序"),
+                             tr("无法读取文件 %1:\n%2。")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return;
+    }
+
+    QTextStream in(&file);
+    textEdit->setPlainText(in.readAll());
+    setCurrentFile(fileName);
+    statusBar()->showMessage(tr("文件已加载"), 2000);
+}
+
+bool MainWindow::saveFile(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, tr("应用程序"),
+                             tr("无法写入文件 %1:\n%2。")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return false;
+    }
+
+    QTextStream out(&file);
+    out << textEdit->toPlainText();
+    setCurrentFile(fileName);
+    statusBar()->showMessage(tr("文件已保存"), 2000);
+    return true;
+}
+
+void MainWindow::setCurrentFile(const QString &fileName)
+{
+    currentFile = fileName;
+    textEdit->document()->setModified(false);
+    setWindowModified(false);
+
+    QString shownName = currentFile;
+    if (currentFile.isEmpty())
+        shownName = "未命名.txt";
+    setWindowFilePath(shownName);
 }
 
 void MainWindow::on_action_paste_triggered()
@@ -236,7 +320,7 @@ void MainWindow::openFile(const QString &filePath)
     resetTextFormat();
 
     file.close();
-    current_file = filePath;
+    currentFile = filePath;  // 使用 currentFile 而不是 current_file
     textEdit->document()->setModified(false);
     
     setWindowTitle(tr("%1 - 文本编辑器").arg(QFileInfo(filePath).fileName()));
@@ -259,41 +343,16 @@ void MainWindow::resetTextFormat()
 
 void MainWindow::setupConnections()
 {
-    qDebug() << "setupConnections started";
-    
     connect(ui->action_font, &QAction::triggered, this, &MainWindow::on_action_font_triggered);
-    qDebug() << "Font action connected";
-    
     connect(ui->action_bold, &QAction::triggered, this, &MainWindow::on_action_bold_triggered);
-    qDebug() << "Bold action connected";
-    
     connect(ui->action_italics, &QAction::triggered, this, &MainWindow::on_action_italics_triggered);
-    qDebug() << "Italics action connected";
-    
     connect(ui->action_underline, &QAction::triggered, this, &MainWindow::on_action_underline_triggered);
-    qDebug() << "Underline action connected";
-    
     connect(ui->action_new_file, &QAction::triggered, this, &MainWindow::on_action_new_file_triggered);
-    qDebug() << "New file action connected";
-    
     connect(ui->action_open_file, &QAction::triggered, this, &MainWindow::on_action_open_file_triggered);
-    qDebug() << "Open file action connected";
-    
     connect(ui->action_save_file, &QAction::triggered, this, &MainWindow::on_action_save_file_triggered);
-    qDebug() << "Save file action connected";
-    
     connect(ui->action_save_as, &QAction::triggered, this, &MainWindow::on_action_save_as_triggered);
-    qDebug() << "Save as action connected";
-    
     connect(ui->action_cut, &QAction::triggered, textEdit, &QTextEdit::cut);
-    qDebug() << "Cut action connected";
-    
     connect(ui->action_copy, &QAction::triggered, textEdit, &QTextEdit::copy);
-    qDebug() << "Copy action connected";
-    
     connect(ui->action_paste, &QAction::triggered, textEdit, &QTextEdit::paste);
-    qDebug() << "Paste action connected";
-    
     // ... 其他连接 ...
-    qDebug() << "setupConnections finished";
 }

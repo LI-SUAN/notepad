@@ -13,6 +13,9 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QTextEdit>
+#include <QString>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -43,10 +46,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-protected:
-    void dragEnterEvent(QDragEnterEvent *event) override;
-    void dropEvent(QDropEvent *event) override;
-
 private slots:
     // 文件操作
     void on_action_new_file_triggered();
@@ -72,15 +71,23 @@ private slots:
     void on_action_about_triggered();
     void on_action_exit_triggered();
 
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
+
     void onFileDropped(const QString &filePath);
 
 private:
     Ui::MainWindow *ui;
-    QString current_file;
     CustomTextEdit *textEdit;
+    QString currentFile;
 
+    bool maybeSave();
     void openFile(const QString &filePath);
     void resetTextFormat();
     void setupConnections();
+    void loadFile(const QString &fileName);
+    bool saveFile(const QString &fileName);
+    void setCurrentFile(const QString &fileName);
 };
+
 #endif // MAINWINDOW_H
