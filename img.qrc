@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>img/bold.png</file>
+        <file>img/copy-two-paper-sheets-interface-symbol.png</file>
+        <file>img/download.png</file>
+        <file>img/font-adjustment.png</file>
+        <file>img/forward.png</file>
+        <file>img/information-button.png</file>
+        <file>img/italic.png</file>
+        <file>img/new-document.png</file>
+        <file>img/open-folder.png</file>
+        <file>img/paste.png</file>
+        <file>img/save.png</file>
+        <file>img/scissors.png</file>
+        <file>img/underline.png</file>
+        <file>img/undo.png</file>
+        <file>img/notes.png</file>
+        <file>img/log-out.png</file>
+        <file>img/printer.png</file>
+    </qresource>
+</RCC>
