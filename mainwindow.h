@@ -84,7 +84,6 @@ private:
     bool maybeSave();
     void openFile(const QString &filePath);
     void resetTextFormat();
-    void setupConnections();
     void loadFile(const QString &fileName);
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);

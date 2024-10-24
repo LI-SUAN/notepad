@@ -64,8 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
 
-    setupConnections();
-
     connect(textEdit, &CustomTextEdit::fileDropped, this, &MainWindow::onFileDropped);
 
     // 允许整个窗口接受拖放
@@ -93,7 +91,8 @@ void MainWindow::on_action_new_file_triggered()
 void MainWindow::on_action_open_file_triggered()
 {
     if (maybeSave()) {
-        QString fileName = QFileDialog::getOpenFileName(this);
+        QString fileName = QFileDialog::getOpenFileName(this, tr("打开文件"), "", 
+                                                        tr("文本文件 (*.txt);;所有文件 (*)"));
         if (!fileName.isEmpty()) {
             loadFile(fileName);
         }
@@ -111,8 +110,12 @@ void MainWindow::on_action_save_file_triggered()
 
 void MainWindow::on_action_save_as_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("保存文件"), "",
+                                                    tr("文本文件 (*.txt);;所有文件 (*)"));
     if (!fileName.isEmpty()) {
+        if (!fileName.endsWith(".txt", Qt::CaseInsensitive)) {
+            fileName += ".txt";
+        }
         saveFile(fileName);
     }
 }
@@ -340,4 +343,3 @@ void MainWindow::resetTextFormat()
     textEdit->setCurrentCharFormat(format);
     textEdit->setFont(QFont());
 }
-
