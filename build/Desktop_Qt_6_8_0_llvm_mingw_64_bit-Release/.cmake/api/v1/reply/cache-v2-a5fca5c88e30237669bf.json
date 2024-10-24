@@ -43,7 +43,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "Debug"
+			"value" : "Release"
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Debug"
+			"value" : "c:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Release"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -219,7 +219,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "-DQT_QML_DEBUG"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS_DEBUG",
@@ -247,7 +247,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "-DQT_QML_DEBUG"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS_MINSIZEREL",
@@ -495,7 +495,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Release/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -1079,7 +1079,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Debug/.qtc/package-manager/auto-setup.cmake"
+			"value" : "C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Release/.qtc/package-manager/auto-setup.cmake"
 		},
 		{
 			"name" : "CMAKE_PROJECT_NAME",
@@ -6250,6 +6250,42 @@
 			"value" : "C:/Qt/6.8.0/llvm-mingw_64/bin/qmake.exe"
 		},
 		{
+			"name" : "Qt6AxBasePrivate_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Qt6AxBasePrivate."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Qt/6.8.0/llvm-mingw_64/lib/cmake/Qt6AxBasePrivate"
+		},
+		{
+			"name" : "Qt6AxContainerTools_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Qt6AxContainerTools."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Qt/6.8.0/llvm-mingw_64/lib/cmake/Qt6AxContainerTools"
+		},
+		{
+			"name" : "Qt6AxContainer_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Qt6AxContainer."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Qt/6.8.0/llvm-mingw_64/lib/cmake/Qt6AxContainer"
+		},
+		{
 			"name" : "Qt6CoreTools_DIR",
 			"properties" : 
 			[
@@ -6491,7 +6527,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Debug"
+			"value" : "C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Release"
 		},
 		{
 			"name" : "notepad_IS_TOP_LEVEL",

@@ -1,3 +1,4 @@
+#define QT_AXCONTAINER_LIB 1
 #define QT_CORE_LIB 1
 #define QT_GUI_LIB 1
 #define QT_NEEDS_QMAIN 1

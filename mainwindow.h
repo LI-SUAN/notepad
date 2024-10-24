@@ -87,6 +87,7 @@ private:
     void loadFile(const QString &fileName);
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);
+    void saveAsDocx(const QString &fileName);  // 添加这行
 };
 
 #endif // MAINWINDOW_H
