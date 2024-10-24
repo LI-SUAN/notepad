@@ -341,18 +341,3 @@ void MainWindow::resetTextFormat()
     textEdit->setFont(QFont());
 }
 
-void MainWindow::setupConnections()
-{
-    connect(ui->action_font, &QAction::triggered, this, &MainWindow::on_action_font_triggered);
-    connect(ui->action_bold, &QAction::triggered, this, &MainWindow::on_action_bold_triggered);
-    connect(ui->action_italics, &QAction::triggered, this, &MainWindow::on_action_italics_triggered);
-    connect(ui->action_underline, &QAction::triggered, this, &MainWindow::on_action_underline_triggered);
-    connect(ui->action_new_file, &QAction::triggered, this, &MainWindow::on_action_new_file_triggered);
-    connect(ui->action_open_file, &QAction::triggered, this, &MainWindow::on_action_open_file_triggered);
-    connect(ui->action_save_file, &QAction::triggered, this, &MainWindow::on_action_save_file_triggered);
-    connect(ui->action_save_as, &QAction::triggered, this, &MainWindow::on_action_save_as_triggered);
-    connect(ui->action_cut, &QAction::triggered, textEdit, &QTextEdit::cut);
-    connect(ui->action_copy, &QAction::triggered, textEdit, &QTextEdit::copy);
-    connect(ui->action_paste, &QAction::triggered, textEdit, &QTextEdit::paste);
-    // ... 其他连接 ...
-}
