@@ -10,3 +10,11 @@
 1260	4159	7514855859633627	CMakeFiles/notepad.dir/notepad_autogen/mocs_compilation.cpp.obj	eb32cc583fd2b0f2
 1267	4622	7514855859708904	CMakeFiles/notepad.dir/mainwindow.cpp.obj	257b34049bda1229
 4622	4755	7514855893262762	notepad.exe	fc32d340bb7eec45
+31	1750	7514876799727491	notepad_autogen/timestamp	476dce085809317e
+31	1750	7514876799727491	notepad_autogen/mocs_compilation.cpp	476dce085809317e
+31	1750	7514876799727491	C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Release/notepad_autogen/timestamp	476dce085809317e
+31	1750	7514876799727491	C:/Dev/notepad/build/Desktop_Qt_6_8_0_llvm_mingw_64_bit-Release/notepad_autogen/mocs_compilation.cpp	476dce085809317e
+1757	5817	7514876801427083	CMakeFiles/notepad.dir/main.cpp.obj	a64f6391faff5523
+1752	5932	7514876801369471	CMakeFiles/notepad.dir/notepad_autogen/mocs_compilation.cpp.obj	eb32cc583fd2b0f2
+1762	6403	7514876801454676	CMakeFiles/notepad.dir/mainwindow.cpp.obj	257b34049bda1229
+6404	6508	7514876847893393	notepad.exe	fc32d340bb7eec45
